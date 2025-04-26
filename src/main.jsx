@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: routes
   }
-]);
+],{ basename: process.env.PUBLIC_URL || '/' });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
