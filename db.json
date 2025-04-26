@@ -1,0 +1,170 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "janetrix",
+      "password": "janetrix"
+    },
+    {
+      "id": "2",
+      "username": "stean",
+      "password": "stean"
+    },
+    {
+      "id": "3",
+      "username": "denzel",
+      "password": "denzel"
+    },
+    {
+      "id": "4",
+      "username": "joseph",
+      "password": "joseph"
+    },
+    {
+      "id": "5",
+      "username": "calvin",
+      "password": "calvin"
+    },
+    {
+      "id": "6",
+      "username": "peter",
+      "password": "peter"
+    },
+    {
+      "id": "7",
+      "username": "bridget",
+      "password": "bridget"
+    }
+  ],
+  "moods": [
+    {
+      "id": "1",
+      "userId": 1,
+      "mood": "Happy",
+      "reflection": "had a wonderful day at the park with friends!",
+      "date": "2023-04-25T09:30:00Z",
+      "emoji": "😊"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "mood": "Tired",
+      "reflection": "long day at work, need to get more sleep.",
+      "date": "2023-04-25T20:15:00Z",
+      "emoji": "😴"
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "mood": "Excited",
+      "reflection": "starting a new project tomorrow!",
+      "date": "2023-04-26T08:45:00Z",
+      "emoji": "🤩"
+    },
+    {
+      "id": "3570",
+      "mood": "Excited",
+      "reflection": "Finishing my project",
+      "date": "2025-04-26T11:11:07.064Z"
+    },
+    {
+      "id": "16a7",
+      "mood": "Tired",
+      "reflection": "Trying to get things done can be really tiresome sometimes\n",
+      "date": "2025-04-26T12:13:17.559Z"
+    }
+  ],
+  "journals": [
+    {
+      "id": "1",
+      "userId": 1,
+      "entry": "today i realized how important it is to take breaks during work. i was much more productive when i stepped away for 10 minutes every hour.",
+      "date": "2023-04-25T19:20:00Z"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "entry": "need to remember to call mom this weekend. she's been feeling lonely since dad passed away.",
+      "date": "2023-04-26T10:05:00Z"
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "entry": "journaling helps me process my thoughts better than i expected. i'll try to make this a daily habit.",
+      "date": "2023-04-26T21:30:00Z"
+    },
+    {
+      "id": "7c61",
+      "entry": "Today I learned hot to use tailwind css properly and I really enjoy it . I no longer confuse it with inline styling\n",
+      "date": "2025-04-26T11:12:21.426Z"
+    }
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Exercise Regularly",
+      "description": "Go for a 30-minute walk every morning."
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Daily Journaling",
+      "description": "Write at least 3 sentences about how you felt today."
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "title": "Practice Gratitude",
+      "description": "List 3 things you're thankful for each night."
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Practice Mindfulness",
+      "description": "Meditate for 10 minutes every morning to stay grounded."
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "title": "Improve Sleep Hygiene",
+      "description": "Stick to a sleep schedule and avoid screens 30 minutes before bed."
+    },
+    {
+      "id": 6,
+      "userId": 3,
+      "title": "Limit Social Media",
+      "description": "Reduce daily screen time and spend more time offline."
+    },
+    {
+      "id": 7,
+      "userId": 4,
+      "title": "Express Emotions",
+      "description": "Write down or share feelings openly once a day."
+    },
+    {
+      "id": 8,
+      "userId": 5,
+      "title": "Celebrate Small Wins",
+      "description": "Acknowledge one thing you did well each day."
+    },
+    {
+      "id": 9,
+      "userId": 6,
+      "title": "Drink More Water",
+      "description": "Aim for at least 6–8 glasses of water daily to stay refreshed."
+    },
+    {
+      "id": 10,
+      "userId": 7,
+      "title": "Daily Reflection",
+      "description": "Reflect each night on what lifted or drained your mood."
+    },
+    {
+      "id": "0cb3",
+      "title": "Facial improvement",
+      "description": "Go for a facial analysis and start skin care maintaining consistency",
+      "userId": 1
+    }
+  ]
+}
