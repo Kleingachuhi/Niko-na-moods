@@ -29,7 +29,7 @@ const MoodTracker = () => {
 
   const fetchMoods = async () => {
     try {
-      const response = await fetch('https://mood-mate-json.vercel.app/moods');
+      const response = await fetch('https://niko-na-mamoods.onrender.com/moods');
       if (!response.ok) throw new Error('Having trouble loading your mood history');
       const moodData = await response.json();
       setPastMoods([...moodData].sort((a, b) => new Date(b.date) - new Date(a.date)));
@@ -54,7 +54,7 @@ const MoodTracker = () => {
     };
 
     try {
-      const response = await fetch('https://mood-mate-json.vercel.app/moods', {
+      const response = await fetch('https://niko-na-mamoods.onrender.com/moods', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMoodEntry)
@@ -73,7 +73,7 @@ const MoodTracker = () => {
   const handleDeleteMood = async (moodId) => {
     setIsLoadingMoods(true);
     try {
-      const response = await fetch(`https://mood-mate-json.vercel.app/moods/${moodId}`, {
+      const response = await fetch(`https://niko-na-mamoods.onrender.com/moods/${moodId}`, {
         method: 'DELETE'
       });
       if (!response.ok) throw new Error(`Error ${response.status}: Failed to delete mood`);

@@ -7,7 +7,7 @@ function Goals() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch('https://mood-mate-json.vercel.app/goals')
+    fetch('https://niko-na-mamoods.onrender.com/goals')
       .then((response) => {
         return response.json();
       })
@@ -22,7 +22,7 @@ function Goals() {
     if (title !== '' && description !== '') {
       setIsLoading(true);
 
-      fetch('https://mood-mate-json.vercel.app/goals', {
+      fetch('https://niko-na-mamoods.onrender.com/goals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

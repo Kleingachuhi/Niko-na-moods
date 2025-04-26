@@ -22,7 +22,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await fetch('https://mood-mate-json.vercel.app/users');
+      const response = await fetch('https://niko-na-mamoods.onrender.com/users');
       const users = await response.json();
       
       const isValidUser = users.some(user => 

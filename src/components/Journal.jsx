@@ -9,7 +9,7 @@ const Journal = () => {
 
   const fetchJournals = async () => {
     try {
-      const res = await fetch('https://mood-mate-json.vercel.app/journals');
+      const res = await fetch('https://niko-na-mamoods.onrender.com/journals');
       if (!res.ok) throw new Error('Failed to fetch journals');
       const data = await res.json();
       setJournals([...data].sort((a, b) => new Date(b.date) - new Date(a.date)));
@@ -29,7 +29,7 @@ const Journal = () => {
     if (!entry.trim()) return;
 
     try {
-      const res = await fetch('https://mood-mate-json.vercel.app/journals', {
+      const res = await fetch('https://niko-na-mamoods.onrender.com/journals', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -50,7 +50,7 @@ const Journal = () => {
   const handleDelete = async (id) => {
     setIsLoading(true);
     try {
-      const res = await fetch(`https://mood-mate-json.vercel.app/journals/${id}`, {
+      const res = await fetch(`https://niko-na-mamoods.onrender.com/journals/${id}`, {
         method: 'DELETE'
       });
       if (!res.ok) throw new Error('Failed to delete entry');
