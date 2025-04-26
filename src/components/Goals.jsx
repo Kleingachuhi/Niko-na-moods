@@ -7,7 +7,7 @@ function Goals() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch('https://niko-na-mamoods.onrender.com/goals')
+    fetch('https://niko-na-moods-aki.onrender.com/goals')
       .then((response) => {
         return response.json();
       })
@@ -22,7 +22,7 @@ function Goals() {
     if (title !== '' && description !== '') {
       setIsLoading(true);
 
-      fetch('https://niko-na-mamoods.onrender.com/goals', {
+      fetch('https://niko-na-moods-aki.onrender.com/goals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
