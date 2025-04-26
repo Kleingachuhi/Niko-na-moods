@@ -77,7 +77,7 @@ const MoodTracker = () => {
         method: 'DELETE'
       });
       if (!response.ok) throw new Error(`Error ${response.status}: Failed to delete mood`);
-      await fetchMoods();
+       fetchMoods();
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
