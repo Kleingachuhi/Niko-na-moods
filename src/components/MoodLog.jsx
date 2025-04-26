@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import MoodEntry from './MoodEntry';
 
 const moodChoices = [
   { mood: 'Happy', emoji: '😊' },
@@ -11,6 +10,16 @@ const moodChoices = [
   { mood: 'Peaceful', emoji: '😌' }
 ];
 
+const moodEmojis = {
+  Happy: '😊',
+  Sad: '😢',
+  Excited: '🤩',
+  Angry: '😠',
+  Tired: '😴',
+  Anxious: '😰',
+  Peaceful: '😌'
+};
+
 const MoodTracker = () => {
   const [pastMoods, setPastMoods] = useState([]);
   const [currentMood, setCurrentMood] = useState('');
@@ -18,26 +27,28 @@ const MoodTracker = () => {
   const [isLoadingMoods, setIsLoadingMoods] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const fetchMoods = async () => {
+    try {
+      const response = await fetch('https://mood-mate-json.vercel.app/moods');
+      if (!response.ok) throw new Error('Having trouble loading your mood history');
+      const moodData = await response.json();
+      setPastMoods([...moodData].sort((a, b) => new Date(b.date) - new Date(a.date)));
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLoadingMoods(false);
+    }
+  };
+
   useEffect(() => {
-    const getSavedMoods = async () => {
-      try {
-        const response = await fetch('https://mood-mate-json.vercel.app/moods');
-        if (!response.ok) throw new Error('Having trouble loading your mood history');
-        const moodData = await response.json();
-        setPastMoods(moodData);
-      } catch (error) {
-        setErrorMessage(error.message);
-      } finally {
-        setIsLoadingMoods(false);
-      }
-    };
-    getSavedMoods();
+    fetchMoods();
   }, []);
 
   const saveNewMood = async (e) => {
     e.preventDefault();
-    const newMoodEntry = { 
-      mood: currentMood, 
+    setIsLoadingMoods(true);
+    const newMoodEntry = {
+      mood: currentMood,
       reflection: moodReason,
       date: new Date().toISOString()
     };
@@ -48,13 +59,45 @@ const MoodTracker = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMoodEntry)
       });
-      if (!response.ok) throw new Error('Oops! Could not save your mood this time');
-      const savedMood = await response.json();
-      setPastMoods([...pastMoods, savedMood]);
+      if (!response.ok) throw new Error(`Error ${response.status}: Failed to save mood`);
+      await fetchMoods();
       setCurrentMood('');
       setMoodReason('');
     } catch (error) {
       setErrorMessage(error.message);
+    } finally {
+      setIsLoadingMoods(false);
+    }
+  };
+
+  const handleDeleteMood = async (moodId) => {
+    setIsLoadingMoods(true);
+    try {
+      const response = await fetch(`https://mood-mate-json.vercel.app/moods/${moodId}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error(`Error ${response.status}: Failed to delete mood`);
+      await fetchMoods();
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLoadingMoods(false);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    try {
+      const dateObj = new Date(dateString);
+      if (isNaN(dateObj.getTime())) return '';
+      return dateObj.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return '';
     }
   };
 
@@ -65,7 +108,7 @@ const MoodTracker = () => {
         backgroundImage: "url('https://i.pinimg.com/736x/76/fe/f5/76fef5ec0bc899199bf988b81552ffd9.jpg')"
       }}
     >
-      <div 
+      <div
         className="p-8 w-full max-w-3xl rounded-xl shadow-2xl mx-4"
         style={{
           backgroundColor: '#7198AF',
@@ -74,7 +117,7 @@ const MoodTracker = () => {
       >
         <h2 className="text-3xl font-semibold text-center mb-6 text-white">How Are You Feeling Today?</h2>
         {errorMessage && <p className="text-red-200 mb-4 text-center">{errorMessage}</p>}
-        
+
         <form onSubmit={saveNewMood} className="space-y-4">
           <select
             className="w-full p-3 border rounded-md bg-white/90 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -99,7 +142,7 @@ const MoodTracker = () => {
           ></textarea>
 
           <div className="flex justify-center">
-            <button 
+            <button
               className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300"
               type="submit"
             >
@@ -117,12 +160,31 @@ const MoodTracker = () => {
           ) : (
             <div className="space-y-6">
               {pastMoods.map((entry) => (
-                <MoodEntry 
-                  key={entry.id} 
-                  mood={entry.mood} 
-                  reflection={entry.reflection}
-                  date={entry.date}
-                />
+                <div key={entry.id} className="bg-white/90 p-4 rounded-lg shadow-sm border border-white/20 hover:bg-white transition-colors relative group">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-2xl" role="img" aria-label={entry.mood}>
+                      {moodEmojis[entry.mood] || '❓'}
+                    </span>
+                    <p className="font-semibold text-blue-600 capitalize">{entry.mood.toLowerCase()}</p>
+                    {entry.date && (
+                      <span className="text-xs text-gray-400 ml-auto">
+                        {formatDate(entry.date)}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => handleDeleteMood(entry.id)}
+                      className="ml-2 w-6 h-6 rounded-full bg-pink-400 hover:bg-red-500 flex items-center justify-center text-white transition-colors duration-200"
+                      aria-label="Delete mood entry"
+                    >
+                      <span className="text-xs">✕</span>
+                    </button>
+                  </div>
+                  {entry.reflection && (
+                    <div className="mt-2">
+                      <p className="text-gray-700 text-sm whitespace-pre-wrap">{entry.reflection}</p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           )}

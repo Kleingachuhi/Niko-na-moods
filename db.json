@@ -37,42 +37,89 @@
     }
   ],
   "moods": [
-    {
-      "id": "1",
-      "userId": 1,
-      "mood": "Happy",
-      "reflection": "had a wonderful day at the park with friends!",
-      "date": "2023-04-25T09:30:00Z",
-      "emoji": "😊"
-    },
-    {
-      "id": "2",
-      "userId": 2,
-      "mood": "Tired",
-      "reflection": "long day at work, need to get more sleep.",
-      "date": "2023-04-25T20:15:00Z",
-      "emoji": "😴"
-    },
-    {
-      "id": "3",
-      "userId": 1,
-      "mood": "Excited",
-      "reflection": "starting a new project tomorrow!",
-      "date": "2023-04-26T08:45:00Z",
-      "emoji": "🤩"
-    },
-    {
-      "id": "3570",
-      "mood": "Excited",
-      "reflection": "Finishing my project",
-      "date": "2025-04-26T11:11:07.064Z"
-    },
-    {
-      "id": "16a7",
-      "mood": "Tired",
-      "reflection": "Trying to get things done can be really tiresome sometimes\n",
-      "date": "2025-04-26T12:13:17.559Z"
-    }
+    [
+      {
+        "id": "4",
+        "userId": 3,
+        "mood": "Sad",
+        "reflection": "Missing my family a lot today.",
+        "date": "2023-04-27T14:30:00Z",
+        "emoji": "😢"
+      },
+      {
+        "id": "5",
+        "userId": 4,
+        "mood": "Peaceful",
+        "reflection": "Spent the morning meditating and journaling.",
+        "date": "2023-04-28T07:00:00Z",
+        "emoji": "😌"
+      },
+      {
+        "id": "6",
+        "userId": 1,
+        "mood": "Anxious",
+        "reflection": "Big presentation coming up tomorrow, feeling nervous.",
+        "date": "2023-04-28T22:10:00Z",
+        "emoji": "😰"
+      },
+      {
+        "id": "7",
+        "userId": 2,
+        "mood": "Happy",
+        "reflection": "Had a great conversation with someone special.",
+        "date": "2023-04-29T10:45:00Z",
+        "emoji": "😊"
+      },
+      {
+        "id": "8",
+        "userId": 3,
+        "mood": "Angry",
+        "reflection": "My package arrived damaged. Super frustrated.",
+        "date": "2023-04-29T18:05:00Z",
+        "emoji": "😠"
+      },
+      {
+        "id": "9",
+        "userId": 4,
+        "mood": "Excited",
+        "reflection": "Booked my summer vacation today!",
+        "date": "2023-04-30T16:30:00Z",
+        "emoji": "🤩"
+      },
+      {
+        "id": "10",
+        "userId": 2,
+        "mood": "Tired",
+        "reflection": "Pulled an all-nighter finishing assignments.",
+        "date": "2023-05-01T03:15:00Z",
+        "emoji": "😴"
+      },
+      {
+        "id": "11",
+        "userId": 1,
+        "mood": "Peaceful",
+        "reflection": "Took a walk through nature today. Felt calm and grounded.",
+        "date": "2023-05-01T17:20:00Z",
+        "emoji": "😌"
+      },
+      {
+        "id": "12",
+        "userId": 2,
+        "mood": "Anxious",
+        "reflection": "Uncertainty about the future is weighing on me.",
+        "date": "2023-05-02T11:40:00Z",
+        "emoji": "😰"
+      },
+      {
+        "id": "13",
+        "userId": 3,
+        "mood": "Happy",
+        "reflection": "Finished reading a great book!",
+        "date": "2023-05-02T20:00:00Z",
+        "emoji": "😊"
+      }
+    ]
+    
   ],
   "journals": [
     {

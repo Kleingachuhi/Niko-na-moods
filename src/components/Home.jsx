@@ -27,8 +27,8 @@ const Home = () => {
           }}
         >
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-2 text-gray-800">Welcome back, {userName}!</h2>
-            <p className="text-lg text-gray-700 mb-6">How are you feeling today?</p>
+            <h2 className="text-4xl font-bold mb-2 text-blue-800">Welcome back, {userName}!</h2>
+            <p className="text-lg text-green-300 mb-6">How are you feeling today?</p>
             
             <div className="flex justify-center gap-2 mb-6">
               {['😊', '😢', '😠', '🤩', '😴'].map((emoji, index) => (

@@ -7,20 +7,20 @@ const Journal = () => {
   const [error, setError] = useState(null);
   const [charCount, setCharCount] = useState(0);
 
-  useEffect(() => {
-    const fetchJournals = async () => {
-      try {
-        const res = await fetch('https://mood-mate-json.vercel.app/journals');
-        if (!res.ok) throw new Error('Failed to fetch journals');
-        const data = await res.json();
-        setJournals(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchJournals = async () => {
+    try {
+      const res = await fetch('https://mood-mate-json.vercel.app/journals');
+      if (!res.ok) throw new Error('Failed to fetch journals');
+      const data = await res.json();
+      setJournals([...data].sort((a, b) => new Date(b.date) - new Date(a.date)));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchJournals();
   }, []);
 
@@ -39,12 +39,26 @@ const Journal = () => {
       });
 
       if (!res.ok) throw new Error('Failed to save journal');
-      const data = await res.json();
-      setJournals([...journals, data]);
+      await fetchJournals();
       setEntry('');
       setCharCount(0);
     } catch (err) {
       setError(err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(`https://mood-mate-json.vercel.app/journals/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete entry');
+      await fetchJournals();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -104,8 +118,16 @@ const Journal = () => {
               {journals.map((j) => (
                 <div
                   key={j.id}
-                  className="group bg-[#181d24] border border-[#444] p-5 rounded-lg shadow-sm transition duration-300 hover:shadow-lg hover:border-[#D391BD] cursor-pointer hover:scale-[1.01]"
+                  className="relative group bg-[#181d24] border border-[#444] p-5 rounded-lg shadow-sm transition duration-300 hover:shadow-lg hover:border-[#D391BD] cursor-pointer hover:scale-[1.01]"
                 >
+                    <button
+                       onClick={() => handleDelete(j.id)}
+                        className="absolute top-1/2 right-2 transform -translate-y-1/2 w-6 h-6 rounded-full bg-[#5C2A74] hover:bg-[#803b9a] flex items-center justify-center text-white transition"
+                               aria-label="Delete journal entry"
+                                             >
+                                    <span className="text-xs">✕</span>
+                                   </button>
+
                   <p className="text-xs text-gray-400 mb-2 group-hover:text-[#D391BD] transition">
                     {formatDate(j.date)}
                   </p>
