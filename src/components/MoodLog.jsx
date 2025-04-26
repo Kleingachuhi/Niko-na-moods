@@ -27,12 +27,16 @@ const MoodTracker = () => {
   const [isLoadingMoods, setIsLoadingMoods] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  // Function to fetch moods from the API
   const fetchMoods = async () => {
     try {
       const response = await fetch('https://niko-na-mamoods.onrender.com/moods');
       if (!response.ok) throw new Error('Having trouble loading your mood history');
       const moodData = await response.json();
-      setPastMoods([...moodData].sort((a, b) => new Date(b.date) - new Date(a.date)));
+
+      // Validate each mood entry, ensure 'mood' and 'date' exist
+      const validMoods = moodData.filter(entry => entry.mood && entry.date);
+      setPastMoods([...validMoods].sort((a, b) => new Date(b.date) - new Date(a.date)));
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -40,10 +44,12 @@ const MoodTracker = () => {
     }
   };
 
+  // Run fetchMoods once when the component is mounted
   useEffect(() => {
     fetchMoods();
   }, []);
 
+  // Function to save a new mood
   const saveNewMood = async (e) => {
     e.preventDefault();
     setIsLoadingMoods(true);
@@ -70,6 +76,7 @@ const MoodTracker = () => {
     }
   };
 
+  // Function to handle deleting a mood entry
   const handleDeleteMood = async (moodId) => {
     setIsLoadingMoods(true);
     try {
@@ -77,7 +84,7 @@ const MoodTracker = () => {
         method: 'DELETE'
       });
       if (!response.ok) throw new Error(`Error ${response.status}: Failed to delete mood`);
-       fetchMoods();
+      fetchMoods();
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -85,6 +92,7 @@ const MoodTracker = () => {
     }
   };
 
+  // Function to format the date for display
   const formatDate = (dateString) => {
     if (!dateString) return '';
     try {
